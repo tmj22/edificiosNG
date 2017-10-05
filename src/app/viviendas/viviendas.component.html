@@ -1,0 +1,30 @@
+<div class="panel-success">
+  <div class="panel-heading">{{titulo}}{{filtro_viviendas}}
+    <div>
+      <input type="radio" [(ngModel)]="filtro_viviendas" name="listado" value="" checked>
+      <label for="listado1">Todas</label>
+
+      <input type="radio" [(ngModel)]="filtro_viviendas" name="listado" value="alquiler">
+      <label for="listado2">Alquiler</label>
+
+      <input type="radio" [(ngModel)]="filtro_viviendas" name="listado" value="compra">
+      <label for="listado3">Compra</label>
+    </div>
+    <div><button class="btn">Favoritos</button></div>
+    <div class="panel-body">
+      <div class="panel-responsive">
+
+
+        <div class="row">
+          <div class="col-md-3" *ngFor="let v of viviendas | filtrado:filtro_viviendas">
+            <div class="col"><img [src]="v.imagen"></div>
+            <div class="col">
+              <h4>{{v.title}}</h4><fav-heart [fav]='v.favorito' (clickHeart)='onClickHeart($event)'></fav-heart></div>
+            <div class="col">{{v.precio | currency:'EUR':true}}</div>
+            <div class="col">{{v.descripcion}}</div>
+            <div class="col">{{v.habitaciones}} habitaciones</div>
+            <div class="col">{{v.tipo}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
